@@ -1,0 +1,4 @@
+world-border:
+  worlds:
+    world:
+      border: 1000
