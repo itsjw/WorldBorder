@@ -27,17 +27,17 @@ public class WorldBorderHandler {
         if (section.isConfigurationSection("worlds")) {
             final ConfigurationSection worldSection = section.getConfigurationSection("worlds");
             for (String worldName : worldSection.getKeys(false)) {
-                if (worldSection.isInt(worldName + ".border")) {
-                    final int centerX = worldSection.getInt(worldName + ".centerX");
-                    final int centerZ = worldSection.getInt(worldName + ".centerZ");
-                    final int distance = worldSection.getInt(worldName + ".distance");
+                final int centerX = worldSection.getInt(worldName + ".centerX", 0);
+                final int centerZ = worldSection.getInt(worldName + ".centerZ", 0);
+                final int distance = worldSection.getInt(worldName + ".distance", 10000);
 
-                    WorldBorder worldBorder = new WorldBorder(centerX, centerZ, distance);
-                    worldBorder.setKnockbackDistance(worldSection.getInt(worldName + ".knockback-distance"));
+                WorldBorder worldBorder = new WorldBorder(centerX, centerZ, distance);
+                worldBorder.setKnockbackDistance(worldSection.getDouble(worldName + ".knockback-distance", 2.5));
 
-                    this.worldBorders.put(worldName, worldBorder);
-                    plugin.getLogger().log(Level.INFO, "Set world border distance for world " + worldName + " to " + distance);
-                }
+                this.worldBorders.put(worldName, worldBorder);
+
+                plugin.getLogger().log(Level.INFO, "Created world border for world '" + worldName + "' with distance " + distance);
+                plugin.getLogger().log(Level.INFO, "Knockback distance of '" + worldName + "' is " + worldBorder.getKnockbackDistance());
             }
         }
     }

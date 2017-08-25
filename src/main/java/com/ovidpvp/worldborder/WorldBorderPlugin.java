@@ -1,5 +1,6 @@
 package com.ovidpvp.worldborder;
 
+import com.ovidpvp.worldborder.listener.WorldBorderListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -26,6 +27,7 @@ public class WorldBorderPlugin extends JavaPlugin {
         }
 
         worldBorderHandler = new WorldBorderHandler(this, getConfig().getConfigurationSection("world-border"));
+        getServer().getPluginManager().registerEvents(new WorldBorderListener(worldBorderHandler), this);
     }
 
     @Override

@@ -32,7 +32,7 @@ public class WorldBorderListener implements Listener {
                 double x = to.getX(), z = to.getZ();
 
                 final int toBlockX = to.getBlockX();
-                if (toBlockX < worldBorder.getCenterX()) {
+                if (toBlockX < worldBorder.getMinX()) {
                     x = worldBorder.getMinX() + worldBorder.getKnockbackDistance();
                 } else if (toBlockX > worldBorder.getMaxX()) {
                     x = worldBorder.getMaxX() - worldBorder.getKnockbackDistance();
@@ -40,9 +40,9 @@ public class WorldBorderListener implements Listener {
 
                 final int toBlockZ = to.getBlockZ();
                 if (toBlockZ < worldBorder.getMinZ()) {
-                    z = worldBorder.getMinX() + worldBorder.getKnockbackDistance();
+                    z = worldBorder.getMinZ() + worldBorder.getKnockbackDistance();
                 } else if (toBlockZ > worldBorder.getMaxZ()) {
-                    z = worldBorder.getMaxX() - worldBorder.getKnockbackDistance();
+                    z = worldBorder.getMaxZ() - worldBorder.getKnockbackDistance();
                 }
 
                 if (x != to.getX() || z != to.getZ()) {
@@ -60,7 +60,6 @@ public class WorldBorderListener implements Listener {
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
     public void onPlayerTeleport(PlayerTeleportEvent event) {
         if (tryBounceOutOfBorder(event)) {
-            event.setCancelled(true);
             event.getPlayer().sendMessage(ChatColor.RED + "You cannot teleport somewhere outside of the world border!");
         }
     }
@@ -68,7 +67,6 @@ public class WorldBorderListener implements Listener {
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
     public void onPlayerMove(PlayerMoveEvent event) {
         if (tryBounceOutOfBorder(event)) {
-            event.setCancelled(true);
             event.getPlayer().sendMessage(ChatColor.RED + "You have reached the world border!");
         }
     }
