@@ -6,10 +6,14 @@ import java.io.File;
 
 public class WorldBorderPlugin extends JavaPlugin {
 
+    private static WorldBorderPlugin instance;
+
     private WorldBorderHandler worldBorderHandler;
 
     @Override
     public void onEnable() {
+        WorldBorderPlugin.instance = this;
+
         // Create a default config file.
         File folder = getDataFolder();
         if (!folder.exists()) {
@@ -22,6 +26,15 @@ public class WorldBorderPlugin extends JavaPlugin {
         }
 
         worldBorderHandler = new WorldBorderHandler(this, getConfig().getConfigurationSection("world-border"));
+    }
+
+    @Override
+    public void onDisable() {
+        WorldBorderPlugin.instance = null;
+    }
+
+    public WorldBorderPlugin getInstance() {
+        return WorldBorderPlugin.instance;
     }
 
     public WorldBorderHandler getWorldBorderHandler() {
