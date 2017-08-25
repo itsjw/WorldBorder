@@ -1,5 +1,7 @@
 world-border:
   worlds:
     world:
-      border: 1000
+      centerX: 0
+      centerX: 0
+      distance: 1000
       knockback-distance: 2.5

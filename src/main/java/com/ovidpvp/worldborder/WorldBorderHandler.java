@@ -28,12 +28,15 @@ public class WorldBorderHandler {
             final ConfigurationSection worldSection = section.getConfigurationSection("worlds");
             for (String worldName : worldSection.getKeys(false)) {
                 if (worldSection.isInt(worldName + ".border")) {
-                    final int border = worldSection.getInt(worldName + ".border");
-                    WorldBorder worldBorder = new WorldBorder(-border, border, -border, border);
+                    final int centerX = worldSection.getInt(worldName + ".centerX");
+                    final int centerZ = worldSection.getInt(worldName + ".centerZ");
+                    final int distance = worldSection.getInt(worldName + ".distance");
+
+                    WorldBorder worldBorder = new WorldBorder(centerX, centerZ, distance);
                     worldBorder.setKnockbackDistance(worldSection.getInt(worldName + ".knockback-distance"));
 
                     this.worldBorders.put(worldName, worldBorder);
-                    plugin.getLogger().log(Level.INFO, "Set world border for world " + worldName + " to " + border);
+                    plugin.getLogger().log(Level.INFO, "Set world border distance for world " + worldName + " to " + distance);
                 }
             }
         }
