@@ -32,7 +32,7 @@ public class WorldBorderListener implements Listener {
                 double x = to.getX(), z = to.getZ();
 
                 final int toBlockX = to.getBlockX();
-                if (toBlockX < worldBorder.getMinX()) {
+                if (toBlockX < worldBorder.getCenterX()) {
                     x = worldBorder.getMinX() + worldBorder.getKnockbackDistance();
                 } else if (toBlockX > worldBorder.getMaxX()) {
                     x = worldBorder.getMaxX() - worldBorder.getKnockbackDistance();

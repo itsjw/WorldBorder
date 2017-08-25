@@ -9,55 +9,56 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 public class WorldBorder {
 
-    private static final int MIN_AREA = 10;
-
     private double knockbackDistance;
-    private int minX;
-    private int maxX;
-    private int minZ;
-    private int maxZ;
+    private int centerX;
+    private int centerZ;
+    private int distance;
 
-    public WorldBorder(int x1, int x2, int z1, int z2) {
-        if (Math.abs(x1 - x2) < MIN_AREA && Math.abs(z1 - z2) < MIN_AREA) {
-            throw new IllegalArgumentException("World border must be at least " + MIN_AREA + "x" + MIN_AREA + " blocks");
-        }
+    public WorldBorder(int centerX, int centerZ, int distance) {
+        this.centerX = centerX;
+        this.centerZ = centerZ;
+        this.distance = distance;
+    }
 
-        this.minX = Math.min(x1, x2);
-        this.maxX = Math.max(x1, x2);
-        this.minZ = Math.min(z1, z2);
-        this.maxZ = Math.max(z1, z2);
+    public int getCenterX() {
+        return centerX;
+    }
+
+    public void setCenterX(int centerX) {
+        this.centerX = centerX;
     }
 
     public int getMinX() {
-        return minX;
-    }
-
-    public void setMinX(int minX) {
-        this.minX = minX;
+        return getCenterX() - distance;
     }
 
     public int getMaxX() {
-        return maxX;
+        return getCenterX() + distance;
     }
 
-    public void setMaxX(int maxX) {
-        this.maxX = maxX;
+    public int getCenterZ() {
+        return centerZ;
+    }
+
+    public void setCenterZ(int centerZ) {
+        this.centerZ = centerZ;
     }
 
     public int getMinZ() {
-        return minZ;
-    }
-
-    public void setMinZ(int minZ) {
-        this.minZ = minZ;
+        return getCenterZ() - distance;
     }
 
     public int getMaxZ() {
-        return maxZ;
+        return getCenterZ() + distance;
     }
 
-    public void setMaxZ(int maxZ) {
-        this.maxZ = maxZ;
+
+    public int getDistance() {
+        return distance;
+    }
+
+    public void setDistance(int distance) {
+        this.distance = distance;
     }
 
     /**
@@ -68,7 +69,7 @@ public class WorldBorder {
      * @return true if the co-ordinates are in bounds with this border
      */
     public boolean isInBounds(int x, int z) {
-        return x >= minX && x <= maxX && z >= minZ && z <= maxZ;
+        return x >= (centerX - distance) && x <= (centerX + distance) && z >= (centerZ + distance) && z <= (centerZ - distance);
     }
 
     /**
