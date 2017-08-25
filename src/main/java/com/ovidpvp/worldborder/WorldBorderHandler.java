@@ -14,20 +14,29 @@ public class WorldBorderHandler {
 
     private final Map<String, WorldBorder> worldBorders = new HashMap<>();
 
+    private final WorldBorderPlugin plugin;
+
     public WorldBorderHandler(WorldBorderPlugin plugin, ConfigurationSection section) {
+        this.plugin = plugin;
+        this.setupConfiguration(section);
+
+        plugin.getServer().getPluginManager().registerEvents(new WorldBorderListener(this), plugin);
+    }
+
+    private void setupConfiguration(ConfigurationSection section) {
         if (section.isConfigurationSection("worlds")) {
             final ConfigurationSection worldSection = section.getConfigurationSection("worlds");
             for (String worldName : worldSection.getKeys(false)) {
                 if (worldSection.isInt(worldName + ".border")) {
                     final int border = worldSection.getInt(worldName + ".border");
-                    this.setWorldBorder(worldName, new WorldBorder(-border, border, -border, border));
+                    WorldBorder worldBorder = new WorldBorder(-border, border, -border, border);
+                    worldBorder.setKnockbackDistance(worldSection.getInt(worldName + ".knockback-distance"));
 
+                    this.worldBorders.put(worldName, worldBorder);
                     plugin.getLogger().log(Level.INFO, "Set world border for world " + worldName + " to " + border);
                 }
             }
         }
-
-        plugin.getServer().getPluginManager().registerEvents(new WorldBorderListener(this), plugin);
     }
 
     public WorldBorder getWorldBorder(World world) {
