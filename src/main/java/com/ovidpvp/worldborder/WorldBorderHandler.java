@@ -19,8 +19,6 @@ public class WorldBorderHandler {
     public WorldBorderHandler(WorldBorderPlugin plugin, ConfigurationSection section) {
         this.plugin = plugin;
         this.setupConfiguration(section);
-
-        plugin.getServer().getPluginManager().registerEvents(new WorldBorderListener(this), plugin);
     }
 
     private void setupConfiguration(ConfigurationSection section) {
