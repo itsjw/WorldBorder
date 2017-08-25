@@ -10,6 +10,8 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
+        <pluginName>WorldBorder</pluginName>
+
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -25,6 +27,8 @@
     </dependencies>
 
     <build>
+        <finalName>${pluginName}</finalName>
+
         <resources>
             <resource>
                 <filtering>true</filtering>
