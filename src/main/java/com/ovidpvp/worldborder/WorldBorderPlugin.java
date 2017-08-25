@@ -33,7 +33,7 @@ public class WorldBorderPlugin extends JavaPlugin {
         WorldBorderPlugin.instance = null;
     }
 
-    public WorldBorderPlugin getInstance() {
+    public static WorldBorderPlugin getInstance() {
         return WorldBorderPlugin.instance;
     }
 
