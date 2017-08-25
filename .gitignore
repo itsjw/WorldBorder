@@ -1,0 +1,36 @@
+# Eclipse stuff
+/.classpath
+/.project
+/.settings
+
+# Netbeans
+/nbproject
+/nbactions.xml
+/nb-configuration.xml
+
+# Ant
+/build.xml
+
+# Maven
+target/**
+dependency-reduced-pom.xml
+*/target/**
+*/dependency-reduced-pom.xml
+
+# Vim
+.*.sw[a-p]
+
+# Various other potential build files
+/build
+/bin
+/dist
+/manifest.mf
+
+# Mac filesystem dust
+/.DS_Store
+
+# IntelliJ
+*.iml
+*.ipr
+*.iws
+.idea/
