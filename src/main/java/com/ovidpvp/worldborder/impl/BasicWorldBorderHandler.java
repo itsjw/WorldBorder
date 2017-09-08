@@ -1,6 +1,8 @@
-package com.ovidpvp.worldborder;
+package com.ovidpvp.worldborder.impl;
 
-import com.ovidpvp.worldborder.listener.WorldBorderListener;
+import com.ovidpvp.worldborder.WorldBorderPlugin;
+import com.ovidpvp.worldborder.api.WorldBorder;
+import com.ovidpvp.worldborder.api.WorldBorderHandler;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 
@@ -10,13 +12,13 @@ import java.util.logging.Level;
 
 import static java.util.Objects.requireNonNull;
 
-public class WorldBorderHandler {
+public class BasicWorldBorderHandler implements WorldBorderHandler {
 
     private final Map<String, WorldBorder> worldBorders = new HashMap<>();
 
     private final WorldBorderPlugin plugin;
 
-    public WorldBorderHandler(WorldBorderPlugin plugin, ConfigurationSection section) {
+    public BasicWorldBorderHandler(WorldBorderPlugin plugin, ConfigurationSection section) {
         this.plugin = plugin;
         this.setupConfiguration(section);
     }
@@ -29,7 +31,7 @@ public class WorldBorderHandler {
                 final int centerZ = worldSection.getInt(worldName + ".centerZ", 0);
                 final int distance = worldSection.getInt(worldName + ".distance", 10000);
 
-                WorldBorder worldBorder = new WorldBorder(centerX, centerZ, distance);
+                WorldBorder worldBorder = new BasicWorldBorder(centerX, centerZ, distance);
                 worldBorder.setKnockbackDistance(worldSection.getDouble(worldName + ".knockback-distance", 2.5));
 
                 this.worldBorders.put(worldName, worldBorder);
@@ -40,12 +42,19 @@ public class WorldBorderHandler {
         }
     }
 
+    @Override
     public WorldBorder getWorldBorder(World world) {
-        requireNonNull(world, "world is null");
-
-        return worldBorders.get(world.getName());
+        return this.getWorldBorder(requireNonNull(world, "world is null").getName());
     }
 
+    @Override
+    public WorldBorder getWorldBorder(String worldName) {
+        requireNonNull(worldName, "world is null");
+
+        return worldBorders.get(worldName);
+    }
+
+    @Override
     public void setWorldBorder(String worldName, WorldBorder worldBorder) {
         requireNonNull(worldName, "worldName is null");
         requireNonNull(worldBorder, "worldBorder is null");

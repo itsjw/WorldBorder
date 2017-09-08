@@ -1,124 +1,83 @@
-package com.ovidpvp.worldborder;
+package com.ovidpvp.worldborder.api;
 
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static java.util.Objects.requireNonNull;
-
 /**
  * Represents a map limit for a World.
  */
-public class WorldBorder {
-
-    private double knockbackDistance;
-    private int centerX;
-    private int centerZ;
-    private int distance;
-
-    /**
-     * Creates a new WorldBorder with a given center and distance.
-     *
-     * @param centerX the x center
-     * @param centerZ the z center
-     * @param distance the distance in blocks
-     */
-    public WorldBorder(int centerX, int centerZ, int distance) {
-        this.centerX = centerX;
-        this.centerZ = centerZ;
-        this.distance = distance;
-    }
+public interface WorldBorder {
 
     /**
      * Gets the lowest x co-ordinate that this border will still be in bounds.
      *
      * @return lowest in bounds x co-ordinate
      */
-    public int getMinX() {
-        return getCenterX() - distance;
-    }
+    int getMinX();
 
     /**
      * Gets the highest x co-ordinate that this border will still be in bounds.
      *
      * @return highest in bounds x co-ordinate
      */
-    public int getMaxX() {
-        return getCenterX() + distance;
-    }
+    int getMaxX();
 
     /**
      * Gets the lowest z co-ordinate that this border will still be in bounds.
      *
      * @return lowest in bounds z co-ordinate
      */
-    public int getMinZ() {
-        return getCenterZ() - distance;
-    }
+    int getMinZ();
 
     /**
      * Gets the highest z co-ordinate that this border will still be in bounds.
      *
      * @return highest in bounds z co-ordinate
      */
-    public int getMaxZ() {
-        return getCenterZ() + distance;
-    }
+    int getMaxZ();
 
     /**
      * Gets the center x co-ordinate of this block.
      *
      * @return x center
      */
-    public int getCenterX() {
-        return centerX;
-    }
+    int getCenterX();
 
     /**
      * Sets the center x co-ordinate of this border.
      *
      * @param centerX x co-ordinate to set
      */
-    public void setCenterX(int centerX) {
-        this.centerX = centerX;
-    }
+    void setCenterX(int centerX);
 
     /**
      * Gets the center z co-ordinate of this block.
      *
      * @return z center
      */
-    public int getCenterZ() {
-        return centerZ;
-    }
+    int getCenterZ();
 
     /**
      * Sets the center z co-ordinate of this border.
      *
      * @param centerZ z co-ordinate to set
      */
-    public void setCenterZ(int centerZ) {
-        this.centerZ = centerZ;
-    }
+    void setCenterZ(int centerZ);
 
     /**
      * Gets the distance in blocks of this border.
      *
      * @return distance of border
      */
-    public int getDistance() {
-        return distance;
-    }
+    int getDistance();
 
     /**
      * Sets the distance in blocks of this border.
      *
      * @param distance distance to set
      */
-    public void setDistance(int distance) {
-        this.distance = distance;
-    }
+    void setDistance(int distance);
 
     /**
      * Checks if a position is in boundaries of this WorldBorder.
@@ -127,9 +86,7 @@ public class WorldBorder {
      * @param z the z co-ordinate to check against.
      * @return true if the co-ordinates are in bounds with this border
      */
-    public boolean isInBounds(int x, int z) {
-        return x >= (centerX - distance) && x <= (centerX + distance) && z >= (centerZ + distance) && z <= (centerZ - distance);
-    }
+    boolean isInBounds(int x, int z);
 
     /**
      * Checks if an Entity is in boundaries of this WorldBorder.
@@ -137,10 +94,7 @@ public class WorldBorder {
      * @param entity the entity to check against
      * @return true if the entity is in bounds with this border
      */
-    public boolean isInBounds(Entity entity) {
-        requireNonNull(entity, "Location is null");
-        return this.isInBounds(entity.getLocation());
-    }
+    boolean isInBounds(Entity entity);
 
     /**
      * Checks if a Location is in boundaries of this WorldBorder.
@@ -148,10 +102,7 @@ public class WorldBorder {
      * @param location the location to check against
      * @return true if the location is in bounds with this border
      */
-    public boolean isInBounds(Location location) {
-        requireNonNull(location, "Location is null");
-        return this.isInBounds(location.getBlockX(), location.getBlockZ());
-    }
+    boolean isInBounds(Location location);
 
     /**
      * Checks if a Block is in boundaries of this WorldBorder.
@@ -159,20 +110,15 @@ public class WorldBorder {
      * @param block the location to check against
      * @return true if the block is in bounds with this border
      */
-    public boolean isInBounds(Block block) {
-        requireNonNull(block, "Block is null");
-        return this.isInBounds(block.getX(), block.getZ());
-    }
+    boolean isInBounds(Block block);
 
     /**
      * Gets the distance in blocks that this border will knock
-     * an entity that is not in bounds back.
+     * an entity that is `not in bounds back.
      *
      * @return distance in blocks
      */
-    public double getKnockbackDistance() {
-        return knockbackDistance;
-    }
+    double getKnockbackDistance();
 
     /**
      * Sets the distance in blocks that this border will knock
@@ -181,8 +127,5 @@ public class WorldBorder {
      * @param knockbackDistance distance in blocks to set
      * @throws IllegalArgumentException if distance value is negative
      */
-    public void setKnockbackDistance(double knockbackDistance) throws IllegalArgumentException {
-        checkArgument(knockbackDistance >= 0, "Knockback distance must be a positive number");
-        this.knockbackDistance = knockbackDistance;
-    }
+    void setKnockbackDistance(double knockbackDistance) throws IllegalArgumentException;
 }
