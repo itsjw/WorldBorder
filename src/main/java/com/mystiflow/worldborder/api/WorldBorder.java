@@ -1,4 +1,4 @@
-package com.ovidpvp.worldborder.api;
+package com.mystiflow.worldborder.api;
 
 import org.bukkit.Location;
 import org.bukkit.block.Block;

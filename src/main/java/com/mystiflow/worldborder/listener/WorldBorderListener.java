@@ -1,7 +1,7 @@
-package com.ovidpvp.worldborder.listener;
+package com.mystiflow.worldborder.listener;
 
-import com.ovidpvp.worldborder.api.WorldBorder;
-import com.ovidpvp.worldborder.api.WorldBorderHandler;
+import com.mystiflow.worldborder.api.WorldBorder;
+import com.mystiflow.worldborder.api.WorldBorderHandler;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;

@@ -1,7 +1,7 @@
-package com.ovidpvp.worldborder;
+package com.mystiflow.worldborder;
 
-import com.ovidpvp.worldborder.api.WorldBorder;
-import com.ovidpvp.worldborder.impl.BasicWorldBorder;
+import com.mystiflow.worldborder.api.WorldBorder;
+import com.mystiflow.worldborder.impl.BasicWorldBorder;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
