@@ -18,7 +18,11 @@ public class WorldBorderPlugin extends JavaPlugin {
         // Create a default config file.
         File folder = getDataFolder();
         if (!folder.exists()) {
-            folder.mkdir();
+            if (!folder.mkdir()) {
+                throw new RuntimeException("Failed to create plugin directory");
+            }
+
+            getLogger().info("Plugin directory has been created");
         } else {
             File file = new File(folder, "config.yml");
             if (!file.exists()) {
