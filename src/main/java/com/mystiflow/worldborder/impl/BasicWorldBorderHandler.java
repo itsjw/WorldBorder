@@ -1,8 +1,8 @@
-package com.ovidpvp.worldborder.impl;
+package com.mystiflow.worldborder.impl;
 
-import com.ovidpvp.worldborder.WorldBorderPlugin;
-import com.ovidpvp.worldborder.api.WorldBorder;
-import com.ovidpvp.worldborder.api.WorldBorderHandler;
+import com.mystiflow.worldborder.WorldBorderPlugin;
+import com.mystiflow.worldborder.api.WorldBorderHandler;
+import com.mystiflow.worldborder.api.WorldBorder;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 
