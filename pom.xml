@@ -17,9 +17,12 @@
 
     <groupId>com.mystiflow.worldborder</groupId>
     <artifactId>worldborder</artifactId>
-    <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
+    <name>WorldBorder</name>
+    <description>A Bukkit plugin to set a border limit to worlds in Minecraft.</description>
+    <inceptionYear>2017</inceptionYear>
     <licenses>
         <license>
             <name>The MIT License (MIT)</name>
@@ -27,25 +30,49 @@
         </license>
     </licenses>
 
-    <inceptionYear>2017</inceptionYear>
+    <developers>
+        <developer>
+            <id>mystiflow</id>
+            <name>Mystiflow</name>
+            <email>mystiflow@gmail.com</email>
+            <roles>
+                <role>author</role>
+                <role>developer</role>
+            </roles>
+            <timezone>GMT</timezone>
+        </developer>
+    </developers>
+
+    <prerequisites>
+        <maven>3.5.0</maven>
+    </prerequisites>
+
+    <scm>
+        <url>https://github.com/Mystiflow/WorldBorder</url>
+        <connection>scm:git:git://github.com/Mystiflow/WorldBorder.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/Mystiflow/WorldBorder.git</developerConnection>
+    </scm>
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/Mystiflow/WorldBorder/issues</url>
+    </issueManagement>
 
     <properties>
-        <pluginName>WorldBorder</pluginName>
-
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
+        <pluginName>WorldBorder</pluginName>
         <currentYear>2017</currentYear> <!-- manual setting -->
         <maven.build.timestamp.format>yyyy</maven.build.timestamp.format>
         <currentYearDynamic>${maven.build.timestamp}</currentYearDynamic>
+        <paper.api.version>1.7.10-R0.1-SNAPSHOT</paper.api.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.github.paperspigot</groupId>
             <artifactId>paperspigot-api</artifactId>
-            <version>1.7.10-R0.1-SNAPSHOT</version>
+            <version>${paper.api.version}</version>
             <scope>provided</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/junit/junit -->
@@ -62,11 +89,17 @@
             <version>3.0</version>
             <scope>runtime</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-javadoc-plugin -->
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>3.0.0-M1</version>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
 
     <build>
-        <finalName>${pluginName}</finalName>
-
+        <defaultGoal>clean install</defaultGoal>
         <resources>
             <resource>
                 <filtering>true</filtering>
@@ -84,12 +117,12 @@
                 </includes>
             </resource>
         </resources>
-
+        <finalName>${pluginName}</finalName>
         <plugins>
             <plugin>
                 <groupId>pl.project13.maven</groupId>
                 <artifactId>git-commit-id-plugin</artifactId>
-                <version>2.2.2</version>
+                <version>2.2.3</version>
                 <executions>
                     <execution>
                         <goals>
@@ -142,4 +175,14 @@
             </plugin>
         </plugins>
     </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.0.0-M1</version>
+            </plugin>
+        </plugins>
+    </reporting>
 </project>
