@@ -24,7 +24,7 @@ public class WorldBorderPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        WorldBorderPlugin.instance = this;
+        setInstance(this);
 
         // Create a default config file.
         File folder = getDataFolder();
@@ -35,9 +35,10 @@ public class WorldBorderPlugin extends JavaPlugin {
 
             getLogger().info("Plugin directory has been created");
         } else {
-            File file = new File(folder, "config.yml");
-            if (!file.exists()) {
-                saveResource(file.getName(), false);
+            File configFile = new File(folder, "config.yml");
+            if (!configFile.exists()) {
+                saveResource(configFile.getName(), false);
+                getLogger().info("Config file has been created");
             }
         }
 
@@ -47,11 +48,15 @@ public class WorldBorderPlugin extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        WorldBorderPlugin.instance = null;
+        setInstance(null);
     }
 
     public static WorldBorderPlugin getInstance() {
         return WorldBorderPlugin.instance;
+    }
+
+    private static void setInstance(WorldBorderPlugin instance) {
+        WorldBorderPlugin.instance = instance;
     }
 
     public WorldBorderHandler getWorldBorderHandler() {

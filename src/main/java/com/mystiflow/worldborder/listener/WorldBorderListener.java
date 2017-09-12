@@ -53,8 +53,8 @@ public class WorldBorderListener implements Listener {
                 } else if (toBlockZ > worldBorder.getMaxZ()) {
                     z = worldBorder.getMaxZ() - worldBorder.getKnockbackDistance();
                 }
-
-                if (x != to.getX() || z != to.getZ()) {
+                
+                if (Double.compare(x, to.getX()) != 0 || Double.compare(z, to.getZ()) != 0) {
                     to.setX(x);
                     to.setY(world.getHighestBlockYAt((int) x, (int) z)); // TODO Check suffocation, lava, etc.
                     to.setZ(z);
