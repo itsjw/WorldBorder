@@ -3,5 +3,5 @@ world-border:
     world:
       centerX: 0
       centerX: 0
-      distance: 10000
+      distance: 2500
       knockback-distance: 2.5
