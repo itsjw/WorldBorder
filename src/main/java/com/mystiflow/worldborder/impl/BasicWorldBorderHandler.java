@@ -58,7 +58,7 @@ public class BasicWorldBorderHandler implements WorldBorderHandler {
 
     @Override
     public WorldBorder getWorldBorder(String worldName) {
-        requireNonNull(worldName, "world is null");
+        requireNonNull(worldName, "worldName is null");
 
         return worldBorders.get(worldName);
     }

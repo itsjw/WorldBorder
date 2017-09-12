@@ -57,11 +57,7 @@ public class BasicWorldBorder implements WorldBorder {
         return getCenterZ() + distance;
     }
 
-    /**
-     * Gets the center x co-ordinate of this block.
-     *
-     * @return x center
-     */
+    @Override
     public int getCenterX() {
         return centerX;
     }
