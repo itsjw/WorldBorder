@@ -25,6 +25,8 @@ package com.mystiflow.worldborder.api;
 
 import org.bukkit.World;
 
+import javax.annotation.Nonnull;
+
 /**
  * Handler to internally stores WorldBorders.
  */
@@ -36,7 +38,7 @@ public interface WorldBorderHandler {
      * @param world the world
      * @return the WorldBorder or null
      */
-    WorldBorder getBorder(World world);
+    WorldBorder getBorder(@Nonnull World world) throws NullPointerException;
 
     /**
      * Gets a WorldBorder for a world.
@@ -44,13 +46,15 @@ public interface WorldBorderHandler {
      * @param worldName name of world
      * @return the WorldBorder or null
      */
-    WorldBorder getBorder(String worldName);
+    WorldBorder getBorder(@Nonnull String worldName);
 
     /**
      * Sets the World Border for a given world name.
      *
      * @param worldName   the world name to replace for
-     * @param worldBorder the new border to set
+     * @param worldBorder the border to replace
      */
-    void setBorder(String worldName, WorldBorder worldBorder);
+    void replaceBorder(@Nonnull String worldName,
+                       @Nonnull WorldBorder worldBorder)
+            throws NullPointerException;
 }

@@ -29,6 +29,7 @@ import com.mystiflow.worldborder.api.WorldBorderHandler;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 
+import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -79,20 +80,20 @@ public class BasicWorldBorderHandler implements WorldBorderHandler {
     }
 
     @Override
-    public final WorldBorder getBorder(final World world) {
+    public final WorldBorder getBorder(@Nonnull final World world) {
         return this.getBorder(
                 requireNonNull(world, "world is null").getName());
     }
 
     @Override
-    public final WorldBorder getBorder(final String worldName) {
+    public final WorldBorder getBorder(@Nonnull final String worldName) {
         return this.worldBorders.get(
                 requireNonNull(worldName, "worldName is null"));
     }
 
     @Override
-    public final void setBorder(final String worldName,
-                                final WorldBorder worldBorder) {
+    public final void replaceBorder(@Nonnull final String worldName,
+                                    @Nonnull final WorldBorder worldBorder) {
         requireNonNull(worldName, "worldName is null");
         requireNonNull(worldBorder, "worldBorder is null");
         this.worldBorders.put(worldName, worldBorder);

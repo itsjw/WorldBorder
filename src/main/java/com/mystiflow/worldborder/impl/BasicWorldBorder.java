@@ -28,6 +28,8 @@ import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 
+import javax.annotation.Nonnull;
+
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.util.Objects.requireNonNull;
 
@@ -109,20 +111,20 @@ public class BasicWorldBorder implements WorldBorder {
     }
 
     @Override
-    public final boolean isInBounds(final Entity entity) {
-        requireNonNull(entity, "Location is null");
+    public final boolean isInBounds(@Nonnull final Entity entity) {
+        requireNonNull(entity, "entity is null");
         return this.isInBounds(entity.getBlockX(), entity.getBlockZ());
     }
 
     @Override
-    public final boolean isInBounds(final Location location) {
-        requireNonNull(location, "Location is null");
+    public final boolean isInBounds(@Nonnull final Location location) {
+        requireNonNull(location, "location is null");
         return this.isInBounds(location.getBlockX(), location.getBlockZ());
     }
 
     @Override
-    public final boolean isInBounds(final Block block) {
-        requireNonNull(block, "Block is null");
+    public final boolean isInBounds(@Nonnull final Block block) {
+        requireNonNull(block, "block is null");
         return this.isInBounds(block.getX(), block.getZ());
     }
 

@@ -27,6 +27,8 @@ import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 
+import javax.annotation.Nonnull;
+
 /**
  * Represents a map limit for a World.
  */
@@ -117,7 +119,7 @@ public interface WorldBorder {
      * @param entity the entity to check against
      * @return true if the entity is in bounds with this border
      */
-    boolean isInBounds(Entity entity);
+    boolean isInBounds(@Nonnull Entity entity);
 
     /**
      * Checks if a Location is in boundaries of this WorldBorder.
@@ -125,7 +127,7 @@ public interface WorldBorder {
      * @param location the location to check against
      * @return true if the location is in bounds with this border
      */
-    boolean isInBounds(Location location);
+    boolean isInBounds(@Nonnull Location location);
 
     /**
      * Checks if a Block is in boundaries of this WorldBorder.
@@ -133,7 +135,7 @@ public interface WorldBorder {
      * @param block the location to check against
      * @return true if the block is in bounds with this border
      */
-    boolean isInBounds(Block block);
+    boolean isInBounds(@Nonnull Block block);
 
     /**
      * Gets the distance in blocks that this border will knock
