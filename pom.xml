@@ -58,10 +58,6 @@
         </developer>
     </developers>
 
-    <prerequisites>
-        <maven>3.5.0</maven>
-    </prerequisites>
-
     <scm>
         <url>https://github.com/Mystiflow/WorldBorder</url>
         <connection>scm:git:git://github.com/Mystiflow/WorldBorder.git</connection>
@@ -199,8 +195,7 @@
             </plugin>
         </plugins>
     </build>
-
-
+    
     <reporting>
         <plugins>
             <plugin>
