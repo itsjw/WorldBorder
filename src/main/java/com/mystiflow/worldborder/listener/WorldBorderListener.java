@@ -27,7 +27,6 @@ import com.mystiflow.worldborder.api.WorldBorder;
 import com.mystiflow.worldborder.api.WorldBorderHandler;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -52,62 +51,51 @@ public class WorldBorderListener implements Listener {
         this.wbHandler = wbHandler;
     }
 
-    private boolean tryBounceOutOfBorder(final PlayerMoveEvent event) {
-        final Location from = event.getFrom();
-        final Location to = event.getTo();
-        if (!from.getWorld().equals(to.getWorld())) {
-            return false;
+    private void adjustToPos(final Location to, final WorldBorder worldBorder) {
+        final double knockback = worldBorder.getKnockbackDistance();
+
+        final int toBlockX = to.getBlockX();
+        if (toBlockX < worldBorder.getMinX()) {
+            to.setX(worldBorder.getMinX() + knockback);
+        } else if (toBlockX > worldBorder.getMaxX()) {
+            to.setX(worldBorder.getMaxX() - knockback);
         }
-
-        // Check the player moved a block either vertically or horizontally.
-        if (from.getBlockX() != to.getBlockX()
-                || from.getBlockY() != to.getBlockY()
-                || from.getBlockZ() != to.getBlockZ()) {
-
-            final World world = to.getWorld();
-            final WorldBorder worldBorder = wbHandler.getBorder(world);
-            if (worldBorder != null) {
-                double x = to.getX(), z = to.getZ();
-
-                final double knockback = worldBorder.getKnockbackDistance();
-                final int toBlockX = to.getBlockX();
-                if (toBlockX < worldBorder.getMinX()) {
-                    x = worldBorder.getMinX() + knockback;
-                } else if (toBlockX > worldBorder.getMaxX()) {
-                    x = worldBorder.getMaxX() - knockback;
-                }
-
-                final int toBlockZ = to.getBlockZ();
-                if (toBlockZ < worldBorder.getMinZ()) {
-                    z = worldBorder.getMinZ() + knockback;
-                } else if (toBlockZ > worldBorder.getMaxZ()) {
-                    z = worldBorder.getMaxZ() - knockback;
-                }
-
-                if (Double.compare(x, to.getX()) != 0
-                        || Double.compare(z, to.getZ()) != 0) {
-                    //TODO: Check for suffocation, lava, etc.
-                    to.setX(x);
-                    to.setY(world.getHighestBlockYAt((int) x, (int) z));
-                    to.setZ(z);
-                    return true;
-                }
-            }
+        final int toBlockZ = to.getBlockZ();
+        if (toBlockZ < worldBorder.getMinZ()) {
+            to.setZ(worldBorder.getMinZ() + knockback);
+        } else if (toBlockZ > worldBorder.getMaxZ()) {
+            to.setZ(worldBorder.getMaxZ() - knockback);
         }
-
-        return false;
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
     public final void onPlayerTeleport(final PlayerTeleportEvent event) {
-        if (tryBounceOutOfBorder(event)) {
+        final Location to = event.getTo();
+        final double origX = to.getX();
+        final double origZ = to.getZ();
+        this.adjustToPos(to, wbHandler.getBorder(to.getWorld()));
+        if (Double.compare(origX, to.getX()) != 0
+                || Double.compare(origZ, to.getZ()) != 0) {
             event.getPlayer().sendMessage(DENY_TELEPORT);
         }
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
     public final void onPlayerMove(final PlayerMoveEvent event) {
-        if (tryBounceOutOfBorder(event)) {
+        final Location from = event.getFrom();
+        final Location to = event.getTo();
+        // If the player didn't move a complete block, ignore.
+        if (from.getBlockX() == to.getBlockX()
+                && from.getBlockY() == to.getBlockY()
+                && from.getBlockZ() == to.getBlockZ()) {
+            return;
+        }
+
+        final double origX = to.getX();
+        final double origZ = to.getZ();
+        this.adjustToPos(to, wbHandler.getBorder(to.getWorld()));
+        if (Double.compare(origX, to.getX()) != 0
+                || Double.compare(origZ, to.getZ()) != 0) {
             event.getPlayer().sendMessage(DENY_ENTRY);
         }
     }
