@@ -91,18 +91,18 @@ public interface WorldBorder {
     void setCenterZ(int centerZ);
 
     /**
-     * Gets the distance in blocks of this border.
+     * Gets the radius in blocks of this border.
      *
-     * @return distance of border
+     * @return radius of border
      */
-    int getDistance();
+    int getRadius();
 
     /**
-     * Sets the distance in blocks of this border.
+     * Sets the radius in blocks of this border.
      *
-     * @param distance distance to set
+     * @param radius radius to set
      */
-    void setDistance(int distance);
+    void setRadius(int radius);
 
     /**
      * Checks if a position is in boundaries of this WorldBorder.

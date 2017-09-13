@@ -38,40 +38,40 @@ public class BasicWorldBorder implements WorldBorder {
     private double knockbackDistance;
     private int centerX;
     private int centerZ;
-    private int distance;
+    private int radius;
 
     /**
-     * Creates a new WorldBorder with a given center and distance.
+     * Creates a new WorldBorder with a given center and radius.
      *
      * @param centerX  the x center
      * @param centerZ  the z center
-     * @param distance the distance in blocks
+     * @param radius the radius in blocks
      */
     public BasicWorldBorder(final int centerX, final int centerZ,
-                            final int distance) {
+                            final int radius) {
         this.centerX = centerX;
         this.centerZ = centerZ;
-        this.distance = distance;
+        this.radius = radius;
     }
 
     @Override
     public final int getMinX() {
-        return centerX - distance;
+        return centerX - radius;
     }
 
     @Override
     public final int getMaxX() {
-        return centerX + distance;
+        return centerX + radius;
     }
 
     @Override
     public final int getMinZ() {
-        return centerZ - distance;
+        return centerZ - radius;
     }
 
     @Override
     public final int getMaxZ() {
-        return centerZ + distance;
+        return centerZ + radius;
     }
 
     @Override
@@ -95,19 +95,19 @@ public class BasicWorldBorder implements WorldBorder {
     }
 
     @Override
-    public final int getDistance() {
-        return distance;
+    public final int getRadius() {
+        return radius;
     }
 
     @Override
-    public final void setDistance(final int distance) {
-        this.distance = distance;
+    public final void setRadius(final int radius) {
+        this.radius = radius;
     }
 
     @Override
     public final boolean isInBounds(final int x, final int z) {
-        return (x >= centerX - distance) && (x <= centerX + distance)
-                && (z >= centerZ - distance) && (z <= centerZ + distance);
+        return (x >= centerX - radius) && (x <= centerX + radius)
+                && (z >= centerZ - radius) && (z <= centerZ + radius);
     }
 
     @Override
