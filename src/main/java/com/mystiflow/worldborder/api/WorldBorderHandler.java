@@ -57,4 +57,11 @@ public interface WorldBorderHandler {
     void replaceBorder(@Nonnull String worldName,
                        @Nonnull WorldBorder worldBorder)
             throws NullPointerException;
+
+    /**
+     * Clears the World Border for a given world name.
+     *
+     * @param worldName the world name to clear for
+     */
+    void clearBorder(@Nonnull String worldName) throws NullPointerException;
 }

@@ -80,22 +80,32 @@ public class BasicWorldBorderHandler implements WorldBorderHandler {
     }
 
     @Override
-    public final WorldBorder getBorder(@Nonnull final World world) {
+    public final WorldBorder getBorder(@Nonnull final World world)
+            throws NullPointerException {
         return this.getBorder(
                 requireNonNull(world, "world is null").getName());
     }
 
     @Override
-    public final WorldBorder getBorder(@Nonnull final String worldName) {
+    public final WorldBorder getBorder(@Nonnull final String worldName)
+            throws NullPointerException {
         return this.worldBorders.get(
                 requireNonNull(worldName, "worldName is null"));
     }
 
     @Override
     public final void replaceBorder(@Nonnull final String worldName,
-                                    @Nonnull final WorldBorder worldBorder) {
+                                    @Nonnull final WorldBorder worldBorder)
+            throws NullPointerException {
         requireNonNull(worldName, "worldName is null");
         requireNonNull(worldBorder, "worldBorder is null");
         this.worldBorders.put(worldName, worldBorder);
+    }
+
+    @Override
+    public void clearBorder(@Nonnull String worldName)
+            throws NullPointerException {
+        requireNonNull(worldName, "worldName is null");
+        this.worldBorders.remove(worldName);
     }
 }
