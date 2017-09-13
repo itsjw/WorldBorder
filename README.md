@@ -10,9 +10,9 @@ The resulting jar file will be found in the /target folder.
 
 ### Prerequisites
 
-* Maven
-* Git
-* Java JDK 1.8
+* [Maven](https://maven.apache.org/)
+* [Git](https://git-scm.com/)
+* [Java JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 * PaperSpigot 1.7.10
 
 ## Contributing
