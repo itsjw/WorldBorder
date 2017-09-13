@@ -39,6 +39,13 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 
 public class WorldBorderListener implements Listener {
 
+    private static final String DENY_BUILD = ChatColor.RED + "You cannot "
+            + "build outside of the world border!";
+    private static final String DENY_TELEPORT = ChatColor.RED + "You cannot "
+            + "teleport outside of the world border!";
+    private static final String DENY_ENTRY = ChatColor.RED + "You have reached "
+            + "the world border!";
+
     private final WorldBorderHandler wbHandler;
 
     public WorldBorderListener(final WorldBorderHandler wbHandler) {
@@ -79,8 +86,9 @@ public class WorldBorderListener implements Listener {
 
                 if (Double.compare(x, to.getX()) != 0
                         || Double.compare(z, to.getZ()) != 0) {
+                    //TODO: Check for suffocation, lava, etc.
                     to.setX(x);
-                    to.setY(world.getHighestBlockYAt((int) x, (int) z));    //TODO: Check for suffocation, lava, etc.
+                    to.setY(world.getHighestBlockYAt((int) x, (int) z));
                     to.setZ(z);
                     return true;
                 }
@@ -93,16 +101,14 @@ public class WorldBorderListener implements Listener {
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
     public final void onPlayerTeleport(final PlayerTeleportEvent event) {
         if (tryBounceOutOfBorder(event)) {
-            event.getPlayer().sendMessage(ChatColor.RED + "You cannot "
-                    + "teleport somewhere outside of the world border!");
+            event.getPlayer().sendMessage(DENY_TELEPORT);
         }
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
     public final void onPlayerMove(final PlayerMoveEvent event) {
         if (tryBounceOutOfBorder(event)) {
-            event.getPlayer().sendMessage(
-                    ChatColor.RED + "You have reached the world border!");
+            event.getPlayer().sendMessage(DENY_ENTRY);
         }
     }
 
@@ -110,11 +116,9 @@ public class WorldBorderListener implements Listener {
     public final void onBlockBreak(final BlockBreakEvent event) {
         final Block block = event.getBlock();
         final WorldBorder worldBorder = wbHandler.getBorder(block.getWorld());
-
         if (worldBorder != null && !worldBorder.isInBounds(block)) {
             event.setCancelled(true);
-            event.getPlayer().sendMessage(ChatColor.RED + "You cannot build "
-                            + "outside of the world border!");
+            event.getPlayer().sendMessage(DENY_BUILD);
         }
     }
 
@@ -122,11 +126,9 @@ public class WorldBorderListener implements Listener {
     public final void onBlockPlace(final BlockPlaceEvent event) {
         final Block block = event.getBlock();
         final WorldBorder worldBorder = wbHandler.getBorder(block.getWorld());
-
         if (worldBorder != null && !worldBorder.isInBounds(block)) {
             event.setCancelled(true);
-            event.getPlayer().sendMessage(ChatColor.RED + "You cannot build "
-                    + "outside of the world border!");
+            event.getPlayer().sendMessage(DENY_BUILD);
         }
     }
 }
