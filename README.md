@@ -12,7 +12,7 @@ The resulting jar file will be found in the /target folder.
 
 * [Maven](https://maven.apache.org/)
 * [Git](https://git-scm.com/)
-* [Java JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+* [Java JDK 9](http://www.oracle.com/technetwork/java/javase/downloads/jdk9-downloads-3848520.html)
 * PaperSpigot 1.7.10
 
 ## Contributing
