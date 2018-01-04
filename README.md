@@ -23,6 +23,4 @@ Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for details on our code of condu
 
 This project is licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) - see the [LICENSE](./LICENSE) file for details.
 
-<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/FzsPaVi7EnVex27phZihnwes/Mystiflow/WorldBorder'>
-  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/FzsPaVi7EnVex27phZihnwes/Mystiflow/WorldBorder.svg' />
-</a>
+
